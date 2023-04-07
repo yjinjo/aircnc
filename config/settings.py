@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "wishlists",
     "bookings",
     "medias",
+    "direct_messages",
 ]
 
 MIDDLEWARE = [
