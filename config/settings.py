@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # 3rd party apps
     # my apps
     "users",
+    "houses",
 ]
 
 MIDDLEWARE = [
