@@ -6,8 +6,11 @@ from .models import House
 class HouseAdmin(admin.ModelAdmin):
     fields = (
         "name",
+        "price_per_night",
+        "description",
         "address",
-        ("price_per_night", "pets_allowed"),
+        "pets_allowed",
+        "owner",
     )
 
     list_display = (
