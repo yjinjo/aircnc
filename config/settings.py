@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "categories",
     "reviews",
     "wishlists",
+    "bookings",
 ]
 
 MIDDLEWARE = [
