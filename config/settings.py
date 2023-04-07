@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "users",
     "rooms",
     "common",
+    "experiences",
 ]
 
 MIDDLEWARE = [
