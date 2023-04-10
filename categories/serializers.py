@@ -1,6 +1,8 @@
 import serializers as serializers
 from rest_framework import serializers
 
+from categories.models import Category
+
 
 class CategorySerializer(serializers.Serializer):
     pk = serializers.IntegerField(read_only=True)
@@ -8,7 +10,10 @@ class CategorySerializer(serializers.Serializer):
         required=True,
         max_length=50,
     )
-    kind = serializers.CharField(
-        max_length=15,
+    kind = serializers.ChoiceField(
+        choices=Category.CategoryKindChoices.choices,
     )
     created_at = serializers.DateTimeField(read_only=True)
+
+    def create(self, validated_data):
+        Category.objects.create(**validated_data)
