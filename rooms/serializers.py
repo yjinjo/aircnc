@@ -23,7 +23,7 @@ class RoomDetailSerializer(ModelSerializer):
 
     rating = serializers.SerializerMethodField()
     is_owner = serializers.SerializerMethodField()
-    reviews = ReviewSerializer(read_only=True, many=True)
+    # reviews = ReviewSerializer(read_only=True, many=True)
 
     class Meta:
         model = Room
