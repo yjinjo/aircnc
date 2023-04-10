@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
 from categories.serializers import CategorySerializer
-from reviews.serializers import ReviewSerializer
+from medias.serializers import PhotoSerializer
 from rooms.models import Amenity, Room
 from users.serializers import TinyUserSerializer
 
@@ -23,7 +23,7 @@ class RoomDetailSerializer(ModelSerializer):
 
     rating = serializers.SerializerMethodField()
     is_owner = serializers.SerializerMethodField()
-    # reviews = ReviewSerializer(read_only=True, many=True)
+    photos = PhotoSerializer(read_only=True, many=True)
 
     class Meta:
         model = Room
@@ -40,6 +40,7 @@ class RoomDetailSerializer(ModelSerializer):
 class RoomListSerializer(ModelSerializer):
     rating = serializers.SerializerMethodField()
     is_owner = serializers.SerializerMethodField()
+    photos = PhotoSerializer(read_only=True, many=True)
 
     class Meta:
         model = Room
@@ -51,6 +52,7 @@ class RoomListSerializer(ModelSerializer):
             "price",
             "rating",
             "is_owner",
+            "photos",
         )
 
     def get_rating(self, room):
