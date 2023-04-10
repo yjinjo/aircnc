@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from rest_framework import status
+from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -22,11 +24,32 @@ class Amenities(APIView):
 
 
 class AmenityDetail(APIView):
-    def get(self, request, pk):
-        pass
+    def get_object(self, pk):
+        try:
+            return Amenity.objects.get(pk=pk)
+        except Amenity.DoesNotExist:
+            raise NotFound
 
-    def post(self, request, pk):
-        pass
+    def get(self, request, pk):
+        amenity = self.get_object(pk)
+        serializer = AmenitySerializer(amenity)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        amenity = self.get_object(pk)
+        serializer = AmenitySerializer(
+            amenity,
+            data=request.data,
+            partial=True,
+        )
+        if serializer.is_valid():
+            updated_amenity = serializer.save()
+            serializer = AmenitySerializer(updated_amenity)
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
 
     def delete(self, request, pk):
-        pass
+        amenity = self.get_object(pk)
+        amenity.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
