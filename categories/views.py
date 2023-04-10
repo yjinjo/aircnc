@@ -1,14 +1,18 @@
+from django.core import serializers
 from django.http import JsonResponse
 from django.shortcuts import render
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from categories.models import Category
 
 
+@api_view()
 def categories(request):
     all_categories = Category.objects.all()
-    return JsonResponse(
+    return Response(
         {
             "ok": True,
-            "categoires": all_categories,
-        },
+            "categories": all_categories,
+        }
     )
