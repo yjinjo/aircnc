@@ -210,3 +210,7 @@ class RoomReviews(APIView):
             many=True,
         )
         return Response(serializer.data)
+
+
+class RoomPhotos(APIView):
+    pass
