@@ -26,6 +26,8 @@ class RoomAdmin(admin.ModelAdmin):
         "amenities",
     )
 
+    search_fields = ("owner__username",)
+
 
 @admin.register(Amenity)
 class AmenityAdmin(admin.ModelAdmin):
