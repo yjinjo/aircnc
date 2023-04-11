@@ -13,6 +13,7 @@ import {
   VStack,
   Text,
   Avatar,
+  Container,
 } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
 
@@ -93,6 +94,29 @@ export default function RoomDetail() {
             </Text>
           </HStack>
         </Heading>
+        <Container mt={16} maxW="container.lg" marginX="none">
+          <Grid gap={10} templateColumns={"1fr 1fr"}>
+            {reviewsData?.map((review, index) => (
+              <VStack alignItems={"flex-start"} key={index}>
+                <HStack>
+                  <Avatar
+                    name={review.user.name}
+                    src={review.user.avatar}
+                    size="md"
+                  />
+                  <VStack spacing={0} alignItems={"flex-start"}>
+                    <Heading fontSize={"md"}>{review.user.name}</Heading>
+                    <HStack spacing={1}>
+                      <FaStar size="12px" />
+                      <Text>{review.rating}</Text>
+                    </HStack>
+                  </VStack>
+                </HStack>
+                <Text>{review.payload}</Text>
+              </VStack>
+            ))}
+          </Grid>
+        </Container>
       </Box>
     </Box>
   );
