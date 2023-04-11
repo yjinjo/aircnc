@@ -13,7 +13,7 @@ export default function SocialLogin() {
         <Divider />
       </HStack>
       <VStack>
-        <Button w="100%" leftIcon={<FaGithub />} colorScheme={"blackAlpha"}>
+        <Button w="100%" leftIcon={<FaGithub />} colorScheme={"blue"}>
           Continue with GitHub
         </Button>
         <Button w="100%" leftIcon={<FaComment />} colorScheme={"yellow"}>
