@@ -1,12 +1,10 @@
-from django.test import TestCase
 from rest_framework.test import APITestCase
-
 from rooms import models
 
 
 class TestAmenities(APITestCase):
     NAME = "Amenity Test"
-    DESC = "Amenity Desc"
+    DESC = "Amenity Des"
     URL = "/api/v1/rooms/amenities/"
 
     def setUp(self):
@@ -16,7 +14,7 @@ class TestAmenities(APITestCase):
         )
 
     def test_all_amenities(self):
-        response = self.client.get("/api/v1/rooms/amenities/")
+        response = self.client.get(self.URL)
         data = response.json()
 
         self.assertEqual(
@@ -42,8 +40,10 @@ class TestAmenities(APITestCase):
         )
 
     def test_create_amenity(self):
+
         new_amenity_name = "New Amenity"
         new_amenity_description = "New Amenity desc."
+        invalid_name = "A" * 151
 
         response = self.client.post(
             self.URL,
@@ -53,7 +53,12 @@ class TestAmenities(APITestCase):
             },
         )
         data = response.json()
-        self.assertEqual(response.status_code, 200, "Not 200 status code.")
+
+        self.assertEqual(
+            response.status_code,
+            200,
+            "Not 200 status code",
+        )
         self.assertEqual(
             data["name"],
             new_amenity_name,
@@ -65,5 +70,18 @@ class TestAmenities(APITestCase):
 
         response = self.client.post(self.URL)
         data = response.json()
-        self.assertNotEqual(response.status_code, 400)
+
+        self.assertEqual(response.status_code, 400)
         self.assertIn("name", data)
+
+        # invalid name post
+        response = self.client.post(
+            self.URL,
+            data={
+                "name": invalid_name,
+                "description": new_amenity_description,
+            },
+        )
+        self.assertIn("name", data)
+        self.assertNotIn("description", data)
+        self.assertEqual(response.status_code, 400)
