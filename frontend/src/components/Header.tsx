@@ -35,8 +35,17 @@ export default function Header() {
   return (
     <HStack
       justifyContent={"space-between"}
+      alignItems="center"
       px={10}
       py={5}
+      direction={{
+        sm: "column",
+        md: "row",
+      }}
+      spacing={{
+        sm: 4,
+        md: 0,
+      }}
       borderBottomWidth={1}
     >
       <Box color={logoColor}>
