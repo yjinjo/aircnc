@@ -11,6 +11,7 @@ python-dotenv = "^1.0.0"
 Pillow = "^9.5.0"
 djangorestframework = "^3.14.0"
 serializers = "^0.2.4"
+PyJWT = "^2.6.0"
 
 [tool.poetry.dev-dependencies]
 
